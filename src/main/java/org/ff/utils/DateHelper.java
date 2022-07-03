@@ -42,6 +42,6 @@ public class DateHelper {
     }
 
     public static String generateFileSuffix(){
-        return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
     }
 }
