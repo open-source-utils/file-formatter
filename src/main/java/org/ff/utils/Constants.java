@@ -8,6 +8,9 @@ public class Constants {
     public static final String PATH = "path";
     public static final String FILE_NAMES = "names";
     public static final String DELIMITERS = "delimiters";
+    public static final String OUTPUT_EXT = ".jsonl";
+
+    public static final String UNDERSCORE = "_";
 
     private static final String TARGET_FORMAT = "yyyy-MM-dd";
 

@@ -26,7 +26,7 @@ public class Main {
         if (delimiters.length == names.length) {
             for (int i = 0; i < names.length; i++) {
                 char delimiter = delimiters[i].charAt(0);
-                String outputPath = path + OUTPUT + names[i]+generateFileSuffix()+".json";
+                String outputPath = path + OUTPUT + names[i] + UNDERSCORE + generateFileSuffix()+ OUTPUT_EXT;
                 String filePath = path + names[i];
                 DataReader.readFiles(filePath, delimiter, outputPath);
             }
