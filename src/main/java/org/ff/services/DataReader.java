@@ -24,13 +24,13 @@ import java.util.stream.Stream;
 public class DataReader {
     @Async("threadPoolTaskExecutor")
     private static void readDataWithCustomSeparator(String content, char delimiter, List<String> fieldNames, String outputPath) {
-        try {
-            CSVParser parser = new CSVParserBuilder().withSeparator(delimiter)
-                    .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
-                    .build();
-            CSVReader csvReader = new CSVReaderBuilder(new StringReader(content))
-                    .withCSVParser(parser)
-                    .build();
+
+        CSVParser parser = new CSVParserBuilder().withSeparator(delimiter)
+                .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
+                .build();
+        try(CSVReader csvReader = new CSVReaderBuilder(new StringReader(content))
+                        .withCSVParser(parser)
+                        .build()) {
             List<String[]> allData = csvReader.readAll();
             Map<String, String> outputMap = new HashMap<>();
             mergeHeaderAndData(fieldNames, allData, outputMap);
@@ -45,7 +45,7 @@ public class DataReader {
             if (row.length == 1 && row[0].isEmpty()) {
                 continue;
             }
-            Map<String, String> obj = new LinkedHashMap();
+            Map<String, String> obj = new HashMap();
             for (int i = 0; i < fieldNames.size(); i++) {
                 SimpleDateFormat simpleDateFormat = DateHelper.isDateValid(row[i]);
                 String formattedDate = null;
@@ -61,13 +61,12 @@ public class DataReader {
     private static List<String> readHeader(String content, char delimiter) {
 
         List<String> fieldNames = null;
-        try {
-            CSVParser parser = new CSVParserBuilder().withSeparator(delimiter)
-                    .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
-                    .build();
-            CSVReader csvReader = new CSVReaderBuilder(new StringReader(content))
-                    .withCSVParser(parser)
-                    .build();
+        CSVParser parser = new CSVParserBuilder().withSeparator(delimiter)
+                .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
+                .build();
+        try(CSVReader csvReader = new CSVReaderBuilder(new StringReader(content))
+                .withCSVParser(parser)
+                .build()) {
             fieldNames = getFieldNames(csvReader.readAll());
 
         } catch (Exception e) {
@@ -84,7 +83,7 @@ public class DataReader {
                 continue;
             }
             if (!headerEncountered && fieldNames == null) {
-                fieldNames = new ArrayList(List.of(row));
+                fieldNames = new ArrayList(Arrays.asList(row));
                 headerEncountered = true;
                 break;
             }
@@ -95,8 +94,7 @@ public class DataReader {
     public static void readFiles(String path, char delimiter, String outputPath) {
         long startTime = System.nanoTime();
         Path file = Paths.get(path);
-        try {
-            Stream<String> lines = Files.lines(file, StandardCharsets.UTF_8);
+        try(Stream<String> lines = Files.lines(file, StandardCharsets.UTF_8)) {
             List<String> header = null;
             boolean headerEncountered = false;
             for (String line : (Iterable<String>) lines::iterator) {
@@ -109,7 +107,7 @@ public class DataReader {
             }
 
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            System.out.println("Exception in readFiles " + ioe.getMessage());
         }
 
         long endTime = System.nanoTime();

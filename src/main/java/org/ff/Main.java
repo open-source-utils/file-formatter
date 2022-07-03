@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         CommandLineParser clp = new CommandLineParser(args);
         initOperation(clp);
+        System.out.println("Hello from main");
     }
 
     private static void initOperation(CommandLineParser clp) {
