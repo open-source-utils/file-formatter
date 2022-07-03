@@ -12,3 +12,5 @@
     <path to input files>/output/
         file1.extention_currentTimestamp.jsonl
         file1.extention_currentTimestamp.jsonl
+        
+### Note: Pipe should be passed as '|'        
