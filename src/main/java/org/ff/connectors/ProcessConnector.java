@@ -23,8 +23,10 @@ public class ProcessConnector {
         }
         String names[] = clp.getArgumentValue(FILE_NAMES);
         String delimiters[] = clp.getArgumentValue(DELIMITERS);
-        long resultFuture = createThreads(path, names, delimiters);
-        System.out.println((names.length == resultFuture? "All ": resultFuture) + "file(s) processed");
+        if(names !=null && delimiters!=null){
+            long resultFuture = createThreads(path, names, delimiters);
+            System.out.println((names.length == resultFuture? "All ": resultFuture) + "file(s) processed");
+        }
 
     }
 

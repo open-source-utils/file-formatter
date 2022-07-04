@@ -18,7 +18,7 @@ public class CallableFileHandler implements Callable<Long> {
  
     @Override
     public Long call() throws Exception {
-        DataReader.readFiles(filePath, delimiter, outputPath);
+        DataReader.processFiles(filePath, delimiter, outputPath);
         return 1l;
     }
  

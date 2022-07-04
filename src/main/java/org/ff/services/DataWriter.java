@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.Map;
 
 public class DataWriter {
-    public static void appendToFile(String fileName,
+    public static void appendToFile(String outputFileName,
                                     Map<String, String> data) {
         ObjectMapper mapper = new ObjectMapper();
-        File file= new File(fileName);
+        File file= new File(outputFileName);
 
         try {
             final File parentDirectory = file.getParentFile();

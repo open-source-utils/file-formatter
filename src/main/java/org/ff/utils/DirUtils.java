@@ -1,6 +1,6 @@
 package org.ff.utils;
 
-import org.ff.Main;
+import org.ff.Application;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -8,7 +8,7 @@ import java.security.CodeSource;
 
 public class DirUtils {
     public static String getJarDirectory() {
-        CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
+        CodeSource codeSource = Application.class.getProtectionDomain().getCodeSource();
         String directoryPath = null;
         try {
             File jarFile = new File(codeSource.getLocation().toURI().getPath());

@@ -1,4 +1,8 @@
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
-java -cp target/file-formatter-jar-with-dependencies.jar org.ff.Main -path "/Users/shakti/Downloads/Java task/DSVS/" -names annual-enterprise-survey-2021-financial-year-provisional-csv.csv 1000000_Sales_Records.csv -delimiters , ,
+java -cp target/file-formatter-jar-with-dependencies.jar org.ff.Application -path "/Users/shakti/Downloads/Java task/DSVS/" -names annual-enterprise-survey-2021-financial-year-provisional-csv.csv 1000000_Sales_Records.csv -delimiters , ,
 
-java -cp target/file-formatter-jar-with-dependencies.jar org.ff.Main -path "/Users/shakti/Downloads/Java task/" -names DSV-input-1.txt DSV-input-2.txt DSV-input-3.txt -delimiters , '|' '|'
+java -cp target/file-formatter-jar-with-dependencies.jar org.ff.Application -path "/Users/shakti/Downloads/Java task/" -names DSV-input-1.txt DSV-input-2.txt DSV-input-3.txt -delimiters , '|' '|'
+
+
+
+java -cp target/file-formatter-jar-with-dependencies.jar org.ff.Application -path "data/" -names DSV-input-1.txt DSV-input-2.txt -delimiters , '|'

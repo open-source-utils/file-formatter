@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 @Service
 public class DataReader {
     @Async("threadPoolTaskExecutor")
-    private static void readDataWithCustomSeparator(String content, char delimiter, List<String> fieldNames, String outputPath) {
+    private static void readDataWithCustomSeparatorAndWrite(String content, char delimiter, List<String> fieldNames, String outputPath) {
 
         CSVParser parser = new CSVParserBuilder().withSeparator(delimiter)
                 .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
@@ -91,7 +91,7 @@ public class DataReader {
         return fieldNames;
     }
 
-    public static void readFiles(String path, char delimiter, String outputPath) {
+    public static void processFiles(String path, char delimiter, String outputPath) {
         long startTime = System.nanoTime();
         Path file = Paths.get(path);
         try(Stream<String> lines = Files.lines(file, StandardCharsets.UTF_8)) {
@@ -103,7 +103,7 @@ public class DataReader {
                     headerEncountered = true;
                     continue;
                 }
-                readDataWithCustomSeparator(line, delimiter, header, outputPath);
+                readDataWithCustomSeparatorAndWrite(line, delimiter, header, outputPath);
             }
 
         } catch (IOException ioe) {
